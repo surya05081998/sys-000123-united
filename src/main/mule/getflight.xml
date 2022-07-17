@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<sub-flow name="getflightSubFlow" doc:id="0f465381-f49e-48d0-a423-1efef2964f4b" >
+		<logger level="INFO" doc:name="get flights flow start Logger" doc:id="70e33f00-be76-4103-ae37-78856b149e87" message="get flights flow started"/>
+		<set-variable value="#[attributes.uriParams.destination]" doc:name="Set destination Variable" doc:id="9be931aa-67c0-4342-b393-25080b7346dc" variableName="destination"/>
+		<http:request method="GET" doc:name="Request" doc:id="695d1d24-caf4-4b70-a7df-3e1247ffd3fa" url="http://mu.mulesoft-training.com/essentials/united/flights/{destination}">
+			<http:uri-params ><![CDATA[#[{
+	destination: vars.destination
+}]]]></http:uri-params>
+		</http:request>
+		<logger level="INFO" doc:name="Logger" doc:id="136909a3-6015-40f2-9960-3f408578bcfd" message="#[payload]"/>
+		<logger level="INFO" doc:name="get flights flow end Logger" doc:id="ddb62ac9-01d8-402d-bd18-8cfca20a1a66" message="get flights flow ended"/>
+	</sub-flow>
+</mule>
